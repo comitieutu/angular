@@ -9,6 +9,6 @@ namespace ComiCore.Model
         public string Name { get; set; }
         public int MoviesId { get; set; }
         public string Path { get; set; }
-        public Movies Movies { get; set; }
+        public virtual Movies Movies { get; set; }
     }
 }

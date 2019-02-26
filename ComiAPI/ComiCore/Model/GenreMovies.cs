@@ -4,10 +4,11 @@ using System.Text;
 
 namespace ComiCore.Model
 {
-    public class Comment : BaseEntity
+    public class GenreMovies
     {
-        public string Content { get; set; }
+        public int GenreId { get; set; }
+        public Genre Genre { get; set; }
         public int MoviesId { get; set; }
-        public virtual Movies Movies { get; set; }
+        public Movies Movies { get; set; }
     }
 }
