@@ -46,7 +46,7 @@ namespace ComiAPI.Controllers
             //}
 
             //return movies;
-            var demoPath = "E:/BOOTSTRAP/Bootstrap4Projects/Navigation.mp4";
+            var demoPath = "C:/Users/User/Videos/Captures/6_3_2018.mp4";
             byte[] fileData;
 
             using (FileStream fs = System.IO.File.OpenRead(demoPath))

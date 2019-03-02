@@ -3,16 +3,16 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { ListmoviesComponent } from './listmovies/listmovies.component';
-import { DetailComponent } from './detail/detail.component'
+import { HomeComponent } from './components/home/home.component';
+import { MoviesDetailComponent } from './components/movies-detail/movies-detail.component';
+import { MoviesListComponent } from './components/movies-list/movies-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    ListmoviesComponent,
-    DetailComponent
+    MoviesDetailComponent,
+    MoviesListComponent
   ],
   imports: [
     BrowserModule,

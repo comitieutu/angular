@@ -1,0 +1,28 @@
+<mat-sidenav-container fullscreen align="center">
+  <mat-toolbar color="primary" class="transparent-bar">
+    <span class="center-flex"></span>
+    <span>
+      <button routerLink="/" mat-button>Home</button>
+      <button mat-button [matMenuTriggerFor]="genre">Thể loại</button>
+    </span>
+
+    <span class="center-flex"></span>
+
+    <mat-menu #genre="matMenu">
+      <button mat-menu-item [matMenuTriggerFor]="phimLe">Phim lẻ</button>
+      <button mat-menu-item [matMenuTriggerFor]="chieuRap">Phim chiếu rạp</button>
+    </mat-menu>
+
+  </mat-toolbar>
+
+  <router-outlet></router-outlet>
+
+  <footer class="docs-footer">
+    <div class="docs-footer-list">
+      <div class="docs-footer-copyright">
+        <p>Created by Comi</p>
+      </div>
+    </div>
+  </footer>
+
+</mat-sidenav-container>
