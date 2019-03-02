@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ComiCore;
 using ComiCore.Model;
+using System.IO;
+using ComiAPI.Services;
+using System.Net.Http.Headers;
 
 namespace ComiAPI.Controllers
 {
@@ -15,31 +18,48 @@ namespace ComiAPI.Controllers
     public class MoviesController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly IVideoService _videoService;
 
-        public MoviesController(ApplicationDbContext context)
+        public MoviesController(ApplicationDbContext context, IVideoService videoService)
         {
             _context = context;
+            _videoService = videoService;
         }
 
         // GET: api/Movies
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Movies>>> GetMovies()
+        public async Task<FileStreamResult> GetMovies()
         {
-            return await _context.Movies.ToListAsync();
+            var stream = await _videoService.GetVideoByName("earth"); // Set earth for demo, you must to replace by dynamic data
+            return new FileStreamResult(stream, "video/mp4");
         }
 
         // GET: api/Movies/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Movies>> GetMovies(int id)
         {
-            var movies = await _context.Movies.FindAsync(id);
+            //var movies = await _context.Movies.FindAsync(id);
 
-            if (movies == null)
+            //if (movies == null)
+            //{
+            //    return NotFound();
+            //}
+
+            //return movies;
+            var demoPath = "E:/BOOTSTRAP/Bootstrap4Projects/Navigation.mp4";
+            byte[] fileData;
+
+            using (FileStream fs = System.IO.File.OpenRead(demoPath))
             {
-                return NotFound();
+                using (BinaryReader binaryReader = new BinaryReader(fs))
+                {
+                    fileData = binaryReader.ReadBytes((int)(fs.Length * 0.6));
+                }
             }
 
-            return movies;
+            MemoryStream stream = new MemoryStream(fileData);
+            return new FileStreamResult(stream, new MediaTypeHeaderValue("audio/mpeg").MediaType);
+
         }
 
         // PUT: api/Movies/5

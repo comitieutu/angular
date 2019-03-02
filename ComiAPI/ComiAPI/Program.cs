@@ -17,6 +17,7 @@ namespace ComiAPI
     {
         public static void Main(string[] args)
         {
+            AppContext.SetSwitch("Switch.Microsoft.AspNetCore.Mvc.EnableRangeProcessing", true); // enable to send partial content
             var host = CreateWebHostBuilder(args).Build();
             using (var scope = host.Services.CreateScope())
             {

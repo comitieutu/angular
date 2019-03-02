@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ComiAPI.Services;
 using ComiCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -32,6 +33,8 @@ namespace ComiAPI
                     Configuration.GetConnectionString("DefaultConnection"),
                     b => b.MigrationsAssembly("ComiAPI")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddScoped<IVideoService, VideoServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
