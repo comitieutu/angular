@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using ComiCore;
+using ComiCore.Seed;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -24,6 +25,19 @@ namespace ComiAPI
                 var services = scope.ServiceProvider;
                 var context = services.GetRequiredService<ApplicationDbContext>();
                 context.Database.Migrate();
+
+                var config = host.Services.GetRequiredService<IConfiguration>();
+                var userEmail = config.GetSection("UserSettings")["UserEmail"];
+                var userPassword = config.GetSection("UserSettings")["UserPassword"];
+                try
+                {
+                    SeedUser.Initialize(services, userEmail, userPassword).Wait();
+                }
+                catch (Exception ex)
+                {
+                    var logger = services.GetRequiredService<ILogger<Program>>();
+                    logger.LogError(ex.Message, "An error occurred seeding the DB.");
+                }
             }
             host.Run();
         }
