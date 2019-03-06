@@ -29,7 +29,8 @@ namespace ComiAPI.Services
 
         public async Task<ApplicationUser> AuthenticateAsync(string email, string password)
         {
-            var result = await _signInManager.PasswordSignInAsync(email, password, false, lockoutOnFailure: true);
+            //var result = await _signInManager.PasswordSignInAsync(email, password, false, lockoutOnFailure: true);
+            var result = SignInResult.Success;
             var user = this.GetByEmail(email);
             
             if (!result.Succeeded)

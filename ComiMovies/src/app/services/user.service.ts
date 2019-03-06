@@ -8,22 +8,22 @@ export class UserService {
     constructor(private http: HttpClient) { }
 
     getAll() {
-        return this.http.get<User[]>(`http://localhost:44362/users`);
+        return this.http.get<User[]>(`https://localhost:44362/api/users`);
     }
 
     getById(id: number) {
-        return this.http.get(`http://localhost:44362/users/${id}`);
+        return this.http.get(`https://localhost:44362/api/users/${id}`);
     }
 
     register(user: User) {
-        return this.http.post(`http://localhost:44362/users/register`, user);
+        return this.http.post(`https://localhost:44362/api/users/register`, user);
     }
 
     update(user: User) {
-        return this.http.put(`http://localhost:44362/users/${user.id}`, user);
+        return this.http.put(`https://localhost:44362/api/users/${user.Id}`, user);
     }
 
     delete(id: number) {
-        return this.http.delete(`http://localhost:44362/users/${id}`);
+        return this.http.delete(`https://localhost:44362/api/users/${id}`);
     }
 }
