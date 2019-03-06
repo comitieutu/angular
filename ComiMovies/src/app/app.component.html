@@ -8,6 +8,12 @@
 
     <span class="center-flex"></span>
 
+    <span *ngIf = "">
+      <button routerLink="/" mat-button>Home</button>
+      <button mat-button>Logout</button>
+    </span>
+
+
     <mat-menu #genre="matMenu">
       <button mat-menu-item>Phim lẻ</button>
       <button mat-menu-item>Phim chiếu rạp</button>

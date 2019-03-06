@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { User } from '../models/user';
+import { UserViewModel } from '../view-models/user-view-model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -19,11 +20,14 @@ export class AuthenticationService {
         return this.currentUserSubject.value;
     }
 
-    login(username: string, password: string) {
-        return this.http.post<any>(`http://localhost:44362/users`, { username, password })
+    login(email: string, password: string) {
+        var userView : UserViewModel = new UserViewModel();
+        userView.Email = email;
+        userView.Password = password;
+        return this.http.post<any>(`https://localhost:44362/api/users`, { userView })
             .pipe(map(user => {
                 // login successful if there's a jwt token in the response
-                if (user && user.token) {
+                if (user && user.Token) {
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
                     localStorage.setItem('currentUser', JSON.stringify(user));
                     this.currentUserSubject.next(user);

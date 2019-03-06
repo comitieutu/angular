@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using ComiAPI.Services;
 using ComiCore;
 using ComiCore.Model;
+using ComiCore.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -26,9 +27,9 @@ namespace ComiAPI.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public IActionResult Authenticate([FromBody]string email, string password)
+        public IActionResult Authenticate([FromBody]UserViewModel userViewModel)
         {
-            var user = _userService.AuthenticateAsync(email, password);
+            var user = _userService.AuthenticateAsync(userViewModel.Email, userViewModel.Password);
 
             if (user == null)
                 return BadRequest(new { message = "Username or password is incorrect" });
