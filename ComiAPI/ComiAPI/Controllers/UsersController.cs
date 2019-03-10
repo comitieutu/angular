@@ -26,18 +26,35 @@ namespace ComiAPI.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost]
-        public IActionResult Authenticate([FromBody]UserViewModel userViewModel)
+        [HttpPost("authenticate")]
+        public ActionResult<ApplicationUser> Authenticate([FromBody]UserViewModel userViewModel)
         {
             var user = _userService.AuthenticateAsync(userViewModel.Email, userViewModel.Password);
 
             if (user == null)
                 return BadRequest(new { message = "Username or password is incorrect" });
 
-            return Ok(user);
+            return user.Result;
         }
 
-        [Authorize(Roles = "SuperAdmin")]
+        [AllowAnonymous]
+        [HttpPost("register")]
+        public IActionResult Register([FromBody]UserViewModel userViewModel)
+        {
+            try
+            {
+                _userService.CreateAsync(userViewModel.Email, userViewModel.Password);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+
+        //[Authorize(Roles = "SuperAdmin")]
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult GetAll()
         {

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
+import { first } from 'rxjs/operators';
 
 
 type UserFields = 'email' | 'password';
@@ -32,9 +35,69 @@ export class RegisterComponent implements OnInit {
 
   error: any;
   
-  constructor() { }
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    public userService: UserService
+  ) { }
 
   ngOnInit() {
+    this.buildForm();
+  }
+
+  get f() { return this.userForm.controls; }
+
+  signup() {
+    if (this.userForm.invalid) {
+        return;
+    }
+
+    this.userService.register(this.userForm.value)
+        .pipe(first())
+        .subscribe(
+            data => {
+                this.router.navigate(['/login']);
+            },
+            error => {
+            });
+  }
+
+  buildForm() {
+    this.userForm = this.fb.group({
+      'email': ['', [
+        Validators.required,
+        Validators.email,
+      ]],
+      'password': ['', [
+        //Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$'),
+        Validators.minLength(6),
+        Validators.maxLength(25),
+      ]],
+    });
+
+    this.userForm.valueChanges.subscribe((data) => this.onValueChanged(data));
+    this.onValueChanged(); 
+  }
+
+  onValueChanged(data?: any) {
+    if (!this.userForm) { return; }
+    const form = this.userForm;
+    for (const field in this.formErrors) {
+      if (Object.prototype.hasOwnProperty.call(this.formErrors, field) && (field === 'email' || field === 'password')) {
+        this.formErrors[field] = '';
+        const control = form.get(field);
+        if (control && control.dirty && !control.valid) {
+          const messages = this.validationMessages[field];
+          if (control.errors) {
+            for (const key in control.errors) {
+              if (Object.prototype.hasOwnProperty.call(control.errors, key) ) {
+                this.formErrors[field] += `${(messages as {[key: string]: string})[key]} `;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 
 }

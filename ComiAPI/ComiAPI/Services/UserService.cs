@@ -19,21 +19,21 @@ namespace ComiAPI.Services
         private readonly AppSettings _appSettings;
         private readonly ApplicationDbContext _context;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public UserService(IOptions<AppSettings> appSettings, ApplicationDbContext context, SignInManager<ApplicationUser> signInManager)
+        public UserService(IOptions<AppSettings> appSettings, ApplicationDbContext context, 
+            SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
         {
             _appSettings = appSettings.Value;
             _context = context;
             _signInManager = signInManager;
+            _userManager = userManager;
         }
 
         public async Task<ApplicationUser> AuthenticateAsync(string email, string password)
         {
-            //var result = await _signInManager.PasswordSignInAsync(email, password, false, lockoutOnFailure: true);
-            var result = SignInResult.Success;
-            var user = this.GetByEmail(email);
-            
-            if (!result.Succeeded)
+            var user = _userManager.FindByEmailAsync(email).Result;
+            if (_userManager.CheckPasswordAsync(user, password).Result == false)
                 return null;
 
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -53,6 +53,21 @@ namespace ComiAPI.Services
 
             return user;
         }
+
+        public async Task<ApplicationUser> CreateAsync(string email, string password)
+        {
+            if (_userManager.FindByEmailAsync(email).Result != null)
+                return null;
+            var user = new ApplicationUser { UserName = email, Email = email };
+            var result = await _userManager.AddPasswordAsync(user, password);
+            //var result = await _userManager.CreateAsync(user, password);
+            _context.Users.Add(user);
+            await _userManager.AddToRoleAsync(user, Enum.GetName(typeof(Role), 4));
+            if (!result.Succeeded)
+                return null;
+            return user;
+        }
+
 
         public IEnumerable<ApplicationUser> GetAll()
         {

@@ -31,6 +31,7 @@ import { PlayingVideoComponent } from './components/ui/playing-video/playing-vid
 import { AuthenticationService } from './services/authentication.service';
 import { UserService } from './services/user.service';
 import { HttpClientModule } from '@angular/common/http';
+import { TrailerDialogComponent } from './components/ui/trailer-dialog/trailer-dialog.component';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -48,7 +49,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     LoginComponent,
     RegisterComponent,
     PlayMovieComponent,
-    PlayingVideoComponent
+    PlayingVideoComponent,
+    TrailerDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -80,6 +82,9 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     AuthenticationService,
     UserService,
     {provide: SWIPER_CONFIG, useValue: DEFAULT_SWIPER_CONFIG}
+  ],
+  entryComponents: [
+    TrailerDialogComponent
   ],
   bootstrap: [AppComponent]
 })
