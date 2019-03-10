@@ -1,10 +1,16 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { map, tap, catchError } from 'rxjs/operators';
 
 import { User } from '../models/user';
 import { UserViewModel } from '../view-models/user-view-model';
+
+const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json'
+    })
+  };
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -20,21 +26,24 @@ export class AuthenticationService {
         return this.currentUserSubject.value;
     }
 
-    login(email: string, password: string) {
-        var userView : UserViewModel = new UserViewModel();
-        userView.Email = email;
-        userView.Password = password;
-        return this.http.post<any>(`https://localhost:44362/api/users`, { userView })
-            .pipe(map(user => {
-                // login successful if there's a jwt token in the response
-                if (user && user.Token) {
-                    // store user details and jwt token in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('currentUser', JSON.stringify(user));
-                    this.currentUserSubject.next(user);
-                }
+    login(email: string, password: string) : Observable<any> {
+        var userViewModel = {
+            'Email': email,
+            'Password': password
+        };
+        // userView.Email = email;
+        // userView.Password = password;
+        
+        return this.http.post<any>(`https://localhost:44362/api/users/authenticate`, { userViewModel }, httpOptions)
+            .pipe(
+              map(res => {
+                  if (res.result && res.result.token) {
+                      localStorage.setItem('currentUser', JSON.stringify(res.result));
+                      this.currentUserSubject.next(res.result);
+                  }
 
-                return user;
-            }));
+                  return res.result;
+              }));
     }
 
     logout() {
@@ -42,4 +51,15 @@ export class AuthenticationService {
         localStorage.removeItem('currentUser');
         this.currentUserSubject.next(null);
     }
+    
+    private handleError<T> (operation = 'operation', result?: T) {
+        return (error: any): Observable<T> => {
+      
+          // TODO: send the error to remote logging infrastructure
+          console.error(error); // log to console instead
+      
+          // Let the app keep running by returning an empty result.
+          return of(result as T);
+        };
+      }
 }

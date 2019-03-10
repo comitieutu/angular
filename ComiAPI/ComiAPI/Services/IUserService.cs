@@ -12,5 +12,6 @@ namespace ComiAPI.Services
         IEnumerable<ApplicationUser> GetAll();
         ApplicationUser GetById(string id);
         ApplicationUser GetByEmail(string email);
+        Task<ApplicationUser> CreateAsync(string email, string password);
     }
 }
