@@ -27,14 +27,14 @@ export class AuthenticationService {
     }
 
     login(email: string, password: string) : Observable<any> {
-        var userViewModel = {
-            'Email': email,
-            'Password': password
-        };
+        // var userViewModel = {
+        //     'email': email,
+        //     'password': password
+        // };
         // userView.Email = email;
         // userView.Password = password;
-        
-        return this.http.post<any>(`https://localhost:44362/api/users/authenticate`, { userViewModel }, httpOptions)
+         
+        return this.http.post<any>(`https://localhost:44362/api/users/authenticate`, { email, password }, httpOptions) // just pass email and password through, Because API does not support object
             .pipe(
               map(res => {
                   if (res.result && res.result.token) {
