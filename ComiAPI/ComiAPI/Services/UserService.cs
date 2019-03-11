@@ -30,7 +30,7 @@ namespace ComiAPI.Services
             _userManager = userManager;
         }
 
-        public async Task<ApplicationUser> AuthenticateAsync(string email, string password)
+        public ApplicationUser Authenticate(string email, string password)
         {
             var user = _userManager.FindByEmailAsync(email).Result;
             if (_userManager.CheckPasswordAsync(user, password).Result == false)
@@ -59,9 +59,8 @@ namespace ComiAPI.Services
             if (_userManager.FindByEmailAsync(email).Result != null)
                 return null;
             var user = new ApplicationUser { UserName = email, Email = email };
-            var result = await _userManager.AddPasswordAsync(user, password);
-            //var result = await _userManager.CreateAsync(user, password);
-            _context.Users.Add(user);
+            var result = await _userManager.CreateAsync(user, password);
+            
             await _userManager.AddToRoleAsync(user, Enum.GetName(typeof(Role), 4));
             if (!result.Succeeded)
                 return null;
@@ -83,5 +82,36 @@ namespace ComiAPI.Services
         {
             return _context.Users.FirstOrDefault(x => x.Email == email);
         }
+
+        //private static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
+        //{
+        //    if (password == null) throw new ArgumentNullException("password");
+        //    if (string.IsNullOrWhiteSpace(password)) throw new ArgumentException("Value cannot be empty or whitespace only string.", "password");
+
+        //    using (var hmac = new System.Security.Cryptography.HMACSHA512())
+        //    {
+        //        passwordSalt = hmac.Key;
+        //        passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+        //    }
+        //}
+
+        //private static bool VerifyPasswordHash(string password, byte[] storedHash, byte[] storedSalt)
+        //{
+        //    if (password == null) throw new ArgumentNullException("password");
+        //    if (string.IsNullOrWhiteSpace(password)) throw new ArgumentException("Value cannot be empty or whitespace only string.", "password");
+        //    if (storedHash.Length != 64) throw new ArgumentException("Invalid length of password hash (64 bytes expected).", "passwordHash");
+        //    if (storedSalt.Length != 128) throw new ArgumentException("Invalid length of password salt (128 bytes expected).", "passwordHash");
+
+        //    using (var hmac = new System.Security.Cryptography.HMACSHA512(storedSalt))
+        //    {
+        //        var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+        //        for (int i = 0; i < computedHash.Length; i++)
+        //        {
+        //            if (computedHash[i] != storedHash[i]) return false;
+        //        }
+        //    }
+
+        //    return true;
+        //}
     }
 }

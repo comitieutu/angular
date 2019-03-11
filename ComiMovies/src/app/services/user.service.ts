@@ -20,7 +20,7 @@ export class UserService {
     }
 
     update(user: User) {
-        return this.http.put(`https://localhost:44362/api/users/${user.Id}`, user);
+        return this.http.put(`https://localhost:44362/api/users/${user.id}`, user);
     }
 
     delete(id: number) {

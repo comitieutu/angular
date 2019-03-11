@@ -8,7 +8,7 @@ namespace ComiAPI.Services
 {
     public interface IUserService
     {
-        Task<ApplicationUser> AuthenticateAsync(string email, string password);
+        ApplicationUser Authenticate(string email, string password);
         IEnumerable<ApplicationUser> GetAll();
         ApplicationUser GetById(string id);
         ApplicationUser GetByEmail(string email);

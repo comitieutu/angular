@@ -27,23 +27,23 @@ namespace ComiAPI.Controllers
 
         [AllowAnonymous]
         [HttpPost("authenticate")]
-        public ActionResult<ApplicationUser> Authenticate([FromBody]UserViewModel userViewModel)
+        public IActionResult Authenticate([FromBody]UserViewModel userViewModel)
         {
-            var user = _userService.AuthenticateAsync(userViewModel.Email, userViewModel.Password);
+            var user = _userService.Authenticate(userViewModel.Email, userViewModel.Password);
 
             if (user == null)
                 return BadRequest(new { message = "Username or password is incorrect" });
 
-            return user.Result;
+            return Ok(user);
         }
 
         [AllowAnonymous]
         [HttpPost("register")]
-        public IActionResult Register([FromBody]UserViewModel userViewModel)
+        public async Task<IActionResult> Register([FromBody]UserViewModel userViewModel)
         {
             try
             {
-                _userService.CreateAsync(userViewModel.Email, userViewModel.Password);
+                await _userService.CreateAsync(userViewModel.Email, userViewModel.Password);
                 return Ok();
             }
             catch (Exception ex)

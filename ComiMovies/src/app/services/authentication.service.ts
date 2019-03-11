@@ -4,7 +4,6 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { map, tap, catchError } from 'rxjs/operators';
 
 import { User } from '../models/user';
-import { UserViewModel } from '../view-models/user-view-model';
 
 const httpOptions = {
     headers: new HttpHeaders({
@@ -27,22 +26,15 @@ export class AuthenticationService {
     }
 
     login(email: string, password: string) : Observable<any> {
-        // var userViewModel = {
-        //     'email': email,
-        //     'password': password
-        // };
-        // userView.Email = email;
-        // userView.Password = password;
          
-        return this.http.post<any>(`https://localhost:44362/api/users/authenticate`, { email, password }, httpOptions) // just pass email and password through, Because API does not support object
+        return this.http.post<any>(`https://localhost:44362/api/users/authenticate`, { email, password }, httpOptions) 
             .pipe(
               map(res => {
-                  if (res.result && res.result.token) {
-                      localStorage.setItem('currentUser', JSON.stringify(res.result));
-                      this.currentUserSubject.next(res.result);
+                  if (res && res.token) {
+                      localStorage.setItem('currentUser', JSON.stringify(res));
+                      this.currentUserSubject.next(res);
                   }
-
-                  return res.result;
+                  return res;
               }));
     }
 
