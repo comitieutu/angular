@@ -10,6 +10,7 @@ using ComiCore.Model;
 using System.IO;
 using ComiAPI.Services;
 using System.Net.Http.Headers;
+using System.Net.Http;
 
 namespace ComiAPI.Controllers
 {
@@ -46,19 +47,32 @@ namespace ComiAPI.Controllers
             //}
 
             //return movies;
-            var demoPath = "C:/Users/User/Videos/Captures/6_3_2018.mp4";
-            byte[] fileData;
+            //var demoPath = "C:/Users/User/Videos/Captures/6_3_2018.mp4";
+            var demoPath = "D:/comi.mp4";
+            //byte[] fileData;
 
-            using (FileStream fs = System.IO.File.OpenRead(demoPath))
+            //using (FileStream fs = System.IO.File.OpenRead(demoPath))
+            //{
+            //    using (BinaryReader binaryReader = new BinaryReader(fs))
+            //    {
+            //        fileData = binaryReader.ReadBytes((int)(fs.Length * 0.6));
+            //    }
+            //}
+
+            //MemoryStream stream = new MemoryStream(fileData);
+            //return new FileStreamResult(stream, new MediaTypeHeaderValue("audio/mpeg").MediaType);
+
+            var video = new VideoStream(demoPath);
+            var response = new HttpResponseMessage
             {
-                using (BinaryReader binaryReader = new BinaryReader(fs))
-                {
-                    fileData = binaryReader.ReadBytes((int)(fs.Length * 0.6));
-                }
-            }
+                Content = new PushStreamContent(video.WriteToStream, new MediaTypeHeaderValue("video/mp4"))
+            };
+            var objectResult = new ObjectResult(response);
+            objectResult.ContentTypes.Add(new Microsoft.Net.Http.Headers.MediaTypeHeaderValue("video/mp4"));
 
-            MemoryStream stream = new MemoryStream(fileData);
-            return new FileStreamResult(stream, new MediaTypeHeaderValue("audio/mpeg").MediaType);
+            return objectResult;
+
+            //return new FileStreamResult(System.IO.File.OpenRead(demoPath), new MediaTypeHeaderValue("audio/mpeg").MediaType);
 
         }
 

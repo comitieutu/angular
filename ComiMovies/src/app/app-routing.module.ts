@@ -15,7 +15,16 @@ const routes: Routes = [
   { path: 'movie/:id', component: MovieComponent },
   { path: 'movies-list', component: MoviesListComponent},
   { path: 'playvideo', component: PlayingVideoComponent},
-  { path: 'player', component: PlayMovieComponent}
+  { path: 'player', component: PlayMovieComponent},
+  {
+    path: 'admin',
+    loadChildren: './admin/admin.module#AdminModule'
+  },
+  {
+    path: '',
+    redirectTo: '',
+    pathMatch: 'full'
+  }
 ];
 
 @NgModule({

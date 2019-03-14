@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace ComiAPI.Services
 {
     public class VideoServices : IVideoService
-    {
-        // Include movies services to get movie url from Database or anywhere you want        
+    {   
 
         private HttpClient _client;
 
