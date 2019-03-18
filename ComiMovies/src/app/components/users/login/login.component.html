@@ -1,3 +1,7 @@
+<mat-sidenav-container fullscreen align="center">
+
+<app-menu></app-menu>
+
 <div class="padding-top-60">
   <div *ngIf="!(authenticationService.currentUserValue | async); else alreadyLoggedIn">
     <div class="Card-Aligner">
@@ -32,3 +36,7 @@
   </ng-template>
 
 </div>
+
+<app-footer></app-footer>
+
+</mat-sidenav-container>

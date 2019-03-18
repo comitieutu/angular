@@ -62,17 +62,17 @@ namespace ComiAPI.Controllers
             //MemoryStream stream = new MemoryStream(fileData);
             //return new FileStreamResult(stream, new MediaTypeHeaderValue("audio/mpeg").MediaType);
 
-            var video = new VideoStream(demoPath);
-            var response = new HttpResponseMessage
-            {
-                Content = new PushStreamContent(video.WriteToStream, new MediaTypeHeaderValue("video/mp4"))
-            };
-            var objectResult = new ObjectResult(response);
-            objectResult.ContentTypes.Add(new Microsoft.Net.Http.Headers.MediaTypeHeaderValue("video/mp4"));
+            //var video = new VideoStream(demoPath);
+            //var response = new HttpResponseMessage
+            //{
+            //    Content = new PushStreamContent(video.WriteToStream, new MediaTypeHeaderValue("video/mp4"))
+            //};
+            //var objectResult = new ObjectResult(response);
+            //objectResult.ContentTypes.Add(new Microsoft.Net.Http.Headers.MediaTypeHeaderValue("video/mp4"));
 
-            return objectResult;
+            //return objectResult;
 
-            //return new FileStreamResult(System.IO.File.OpenRead(demoPath), new MediaTypeHeaderValue("audio/mpeg").MediaType);
+            return new FileStreamResult(System.IO.File.OpenRead(demoPath), new MediaTypeHeaderValue("audio/mpeg").MediaType);
 
         }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ComiCore.Video;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
@@ -10,5 +11,7 @@ namespace ComiAPI.Services
     public interface IVideoService
     {
         Task<Stream> GetVideoByName(string name);
+        List<VideoFileInfo> FindVideoFiles();
+        IVideoFile GetVideoFile(string id);
     }
 }

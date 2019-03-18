@@ -1,8 +1,4 @@
-.transparent-bar {
-    position: absolute;
-    z-index: 999;
-    background: transparent;
-  }
+
   
   .img-header {
     height: 40px;
@@ -25,9 +21,7 @@
     border-bottom: 1px solid;
   }
   
-  .center-flex{
-    flex: 1 1 auto;
-  }
+  
   
   .home-name-padding {
     padding-left: 70px;
@@ -47,4 +41,7 @@
     .janco-ocult{  display: none;  }
     .home-name-padding {padding-left: 0;}
   }
+  
+
+
   

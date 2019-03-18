@@ -1,0 +1,23 @@
+<mat-toolbar color="primary" class="transparent-bar">
+  <span class="center-flex"></span>
+  <span>
+    <button routerLink="/" mat-button>Home</button>
+    <button mat-button [matMenuTriggerFor]="genre">Thể loại</button>
+  </span>
+
+  <span class="center-flex"></span>
+
+  <span *ngIf="!currentUser">
+    <button mat-button routerLink="/login">Login</button>
+  </span>
+  <span *ngIf="currentUser">
+    <button mat-button>{{currentUser.email}}</button>
+    <button mat-button (click)="logout()">Logout</button>
+  </span>
+
+  <mat-menu #genre="matMenu">
+    <button mat-menu-item>Phim lẻ</button>
+    <button mat-menu-item>Phim chiếu rạp</button>
+  </mat-menu>
+
+</mat-toolbar>

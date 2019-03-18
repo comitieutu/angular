@@ -1,3 +1,7 @@
+<mat-sidenav-container fullscreen align="center">
+
+<app-menu></app-menu>
+
 <div *ngIf="movie">
 
   <div class="parrallax-content" [ngStyle]="{'background-image': 'linear-gradient(rgba(52,41,49,0.80), rgba(0,0,0,0.85)), url('+'/assets/img/background-main.jpg'+')'}">
@@ -72,3 +76,7 @@
     <h4>Loading</h4>
   </div>
 </div>
+
+<app-footer></app-footer>
+
+</mat-sidenav-container>

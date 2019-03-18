@@ -1,0 +1,8 @@
+.transparent-bar {
+position: absolute;
+z-index: 999;
+background: transparent;
+}
+.center-flex{
+flex: 1 1 auto;
+}

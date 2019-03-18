@@ -33,6 +33,8 @@ import { UserService } from './services/user.service';
 import { HttpClientModule } from '@angular/common/http';
 import { TrailerDialogComponent } from './components/ui/trailer-dialog/trailer-dialog.component';
 import { MovieService } from './services/movie.service';
+import { MenuComponent } from './components/ui/menu/menu.component';
+import { FooterComponent } from './components/ui/footer/footer.component';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -51,7 +53,9 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     RegisterComponent,
     PlayMovieComponent,
     PlayingVideoComponent,
-    TrailerDialogComponent
+    TrailerDialogComponent,
+    MenuComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
