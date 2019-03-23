@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AdminComponent } from './admin.component';
 import { SettingComponent } from './components/setting/setting.component';
+import { CreateGenreComponent } from './genres/create-genre/create-genre.component';
+import { ListGenreComponent } from './genres/list-genre/list-genre.component';
 
 const routes: Routes = [
   {
@@ -10,7 +12,9 @@ const routes: Routes = [
     component: AdminComponent,
     children: [
       { path: 'dashboard', component: DashboardComponent, pathMatch: 'full' },
-      { path: 'settings', component: SettingComponent}
+      { path: 'settings', component: SettingComponent},
+      { path: 'genres/create', component: CreateGenreComponent},
+      { path: 'genres/list', component: ListGenreComponent}
     ]
   }
 ];

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ComiAPI.Helpers;
+using ComiAPI.Middleware;
 using ComiAPI.Services;
 using ComiCore;
 using ComiCore.Model;
@@ -102,9 +103,11 @@ namespace ComiAPI
                 .AllowAnyHeader());
 
             app.UseAuthentication();
-
+            
             app.UseHttpsRedirection();
             app.UseMvc();
+
+            app.UseRequestStream();
         }
     }
 }

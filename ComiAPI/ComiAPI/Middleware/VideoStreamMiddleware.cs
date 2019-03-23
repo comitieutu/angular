@@ -10,21 +10,21 @@ namespace ComiAPI.Middleware
 {
     public class VideoStreamMiddleware
     {
-        private readonly IVideoService videoService;
+        //private readonly IVideoService videoService;
         private readonly RequestDelegate next;
 
         private const long maxTransfer = 1024 * 1024;
 
-        public VideoStreamMiddleware(RequestDelegate next, IVideoService videoService)
+        public VideoStreamMiddleware(RequestDelegate next)
         {
             if (next == null) throw new ArgumentNullException(nameof(next));
-            if (videoService == null) throw new ArgumentNullException(nameof(videoService));
+            //if (videoService == null) throw new ArgumentNullException(nameof(videoService));
 
             this.next = next;
-            this.videoService = videoService;
+            //this.videoService = videoService;
         }
 
-        public async Task Invoke(HttpContext httpContext)
+        public async Task Invoke(HttpContext httpContext, IVideoService videoService)
         {
             if (!httpContext.Request.Path.StartsWithSegments(new PathString("/videostream")))
             {
@@ -33,7 +33,7 @@ namespace ComiAPI.Middleware
             }
 
             string id = httpContext.Request.Query["file"];
-            IVideoFile videoFile = this.videoService.GetVideoFile(id);
+            IVideoFile videoFile = videoService.GetVideoFile(id);
             if (videoFile == null)
             {
                 httpContext.Response.StatusCode = 404;

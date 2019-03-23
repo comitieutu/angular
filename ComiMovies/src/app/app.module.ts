@@ -8,12 +8,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 
 import 'hammerjs';
-import {
-  MatButtonModule, MatCardModule, MatChipsModule, MatIconModule, MatInputModule, MatListModule, MatSidenavModule,
-  MatTabsModule,
-  MatToolbarModule, MatTooltipModule, MatPaginatorModule, MatMenuModule, MatDialogModule, MatSliderModule,
-  MatExpansionModule
-} from '@angular/material';
+
 import { MatVideoModule } from 'mat-video';
 
 import { PosterCardComponent } from './components/ui/poster-card/poster-card.component';
@@ -35,6 +30,7 @@ import { TrailerDialogComponent } from './components/ui/trailer-dialog/trailer-d
 import { MovieService } from './services/movie.service';
 import { MenuComponent } from './components/ui/menu/menu.component';
 import { FooterComponent } from './components/ui/footer/footer.component';
+import { MaterialModule } from './material.module';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -64,21 +60,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatSidenavModule,
-    MatButtonModule,
-    MatTabsModule,
-    MatChipsModule,
-    MatInputModule,
-    MatIconModule,
-    MatToolbarModule,
-    MatListModule,
-    MatCardModule,
-    MatTooltipModule,
-    MatPaginatorModule,
-    MatMenuModule,
-    MatDialogModule,
-    MatSliderModule,
-    MatExpansionModule,
+    MaterialModule,   
     MatVideoModule,
     SwiperModule,
     FlexLayoutModule

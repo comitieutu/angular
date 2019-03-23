@@ -41,4 +41,12 @@
   .mat-icon-button{
     margin-left: 7px;
   }
-  
+  :host ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-label {
+    color: #000000 !important;
+}
+:host ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-underline {
+  background-color: #000000 !important;
+}
+:host ::ng-deep .mat-form-field {
+  display: inline;
+}

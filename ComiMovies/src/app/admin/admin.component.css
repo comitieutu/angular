@@ -1,3 +1,25 @@
+@media screen and (min-width: 991px){
+  #menu{
+    display: none;
+  }
+}
+
+@media screen and (max-width: 990px){
+  #sidebar, #nav-right, #nav-left-button{
+    display: none;
+  }
+  #menu{
+    display: inline;
+  }
+  #main-panel{
+    padding-left: 0;
+    -webkit-transition: all 400ms;
+    -moz-transition: all 400ms;
+    -ms-transition: all 400ms;
+    -o-transition: all 400ms;
+    transition: all 400ms;
+  }
+}
 .wrapper {
     position: relative;
     top: 0;
@@ -45,3 +67,23 @@
     transition: all 500ms;
   }
   
+  .containeradmin{
+    padding: 15px 30px;
+  }
+  @media (min-width: 1200px) {
+    .containeradmin {
+      width: 100%;
+    }
+  }
+  
+  @media (min-width: 992px) {
+    .containeradmin {
+      width: 100%;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .containeradmin {
+      width: 100%;
+    }
+  }

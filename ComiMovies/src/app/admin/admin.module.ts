@@ -9,8 +9,14 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { FigurecardComponent } from './components/ui/figurecard/figurecard.component';
 import { ImagecardComponent } from './components/ui/imagecard/imagecard.component';
 import { NavbarComponent } from './components/ui/navbar/navbar.component';
-import { MatButtonModule, MatRadioModule, MatInputModule, MatMenuModule, MatCheckboxModule } from '@angular/material';
 import { SettingComponent } from './components/setting/setting.component';
+import { CreateGenreComponent } from './genres/create-genre/create-genre.component';
+import { CreateMoviesComponent } from './movies/create-movies/create-movies.component';
+import { MaterialModule } from '../material.module';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { GenreService } from '../services/genre.service';
+import { ListGenreComponent } from './genres/list-genre/list-genre.component';
+import { EditGenreComponent } from './genres/edit-genre/edit-genre.component';
 
 @NgModule({
   declarations: [
@@ -20,17 +26,22 @@ import { SettingComponent } from './components/setting/setting.component';
     FigurecardComponent,
     ImagecardComponent,
     NavbarComponent,
-    SettingComponent
+    SettingComponent,
+    CreateGenreComponent,
+    CreateMoviesComponent,
+    ListGenreComponent,
+    EditGenreComponent
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
-    MatButtonModule,
-    MatRadioModule,
-    MatInputModule,
-    MatMenuModule,
-    MatCheckboxModule
+    FormsModule,
+    ReactiveFormsModule,
+    MaterialModule
   ],
-  providers: [SettingsService]
+  providers: [
+    SettingsService,
+    GenreService
+  ]
 })
 export class AdminModule { }
