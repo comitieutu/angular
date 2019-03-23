@@ -1,0 +1,26 @@
+<div class="row" style="margin-top: 30px">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="card">
+      <div class="card-header">
+        <i class="material-icons">perm_identity</i>
+      </div>
+      <div class="card-content">
+        <h4 class="card-title">Create genre -
+          <small class="category">Complete new genre</small>
+        </h4>
+        <form [formGroup]="genreForm" (ngSubmit)="create()">
+          <div class="row">
+            <div class="col-md-6">
+              <mat-form-field>
+                <input matInput type="text" placeholder="Name" formControlName="name">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row action-btn">
+            <button md-raised-button type="submit" class="btn btn-rose">Create</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
