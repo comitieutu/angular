@@ -6,7 +6,13 @@ export const ROUTES = [
         {path: 'genres/create', title: 'Create', icon: 'C'},
         {path: 'genres/list', title: 'List', icon: 'L'},
         {path: 'genres/wizard', title: 'Wizard', icon: 'W'},
-      ]},
+      ]
+    },
+    { path: '#movie', id: 'movie', title: 'Movie management', icon: 'apps', children: [
+      {path: 'movies/create', title: 'Create', icon: 'C'},
+      {path: 'movies/list', title: 'List', icon: 'L'}
+    ]
+  },
     { path: 'notification', title: 'Notification', icon: 'notifications', children: null },
     { path: 'alert', title: 'Sweet Alert', icon: 'warning', children: null },
     { path: 'settings', title: 'Settings', icon: 'settings', children: null },
