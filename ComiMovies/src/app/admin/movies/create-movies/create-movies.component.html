@@ -1,3 +1,113 @@
-<p>
-  create-movies works!
-</p>
+<app-navbar title="Create movie"></app-navbar>
+<div class="row" style="margin-top: 30px">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-content">
+        <h4 class="card-title">Create movie
+          <small class="category">Complete the movie information</small>
+        </h4>
+        <form [formGroup]="movie">
+          <div class="row">
+            <div class="col-md-12">
+              <mat-form-field>
+                <input matInput type="text" placeholder="Title" formControlName="title" value="">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <mat-form-field class="mat-form-field-infix">
+                <mat-select placeholder="Country" formControlName="country" name="country">
+                  <mat-option *ngFor="let item of country " [value]="item.code">{{item.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <mat-form-field>
+                <mat-select placeholder="Kind" formControlName="kind" name="kind">
+                  <mat-option *ngFor="let item of kinds " [value]="item.id">{{item.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <mat-form-field>
+                <mat-select placeholder="Quantity" formControlName="quality">
+                  <mat-option *ngFor="let item of quantities " [value]="item.code">{{item.displayName}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <mat-form-field>
+                <input matInput [matDatepicker]="releaseDate" formControlName="releaseDate" placeholder="Release date">
+                <mat-datepicker-toggle matSuffix [for]="releaseDate"></mat-datepicker-toggle>
+                <mat-datepicker #releaseDate></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <mat-form-field>
+                <mat-select placeholder="Language" formControlName="language" multiple>
+                  <mat-option *ngFor="let item of languages " [value]="item.code">{{item.name}}/{{item.native}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <mat-form-field>
+                <mat-select placeholder="Directors" formControlName="moviesDirectors" multiple>
+                  <mat-select-trigger>
+                    {{movie.value.moviesDirectors ? movie.value.moviesDirectors[0].name : ''}}
+                    <span *ngIf="movie.value.moviesDirectors?.length > 1" class="example-additional-selection">
+                      (+{{movie.value.moviesDirectors.length - 1}}
+                      {{movie.value.moviesDirectors?.length === 2 ? 'other' : 'others'}})
+                    </span>
+                  </mat-select-trigger>
+                  <mat-option *ngFor="let director of directors" [value]="director">{{director.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field>
+                <mat-select placeholder="Actors" formControlName="moviesActors" multiple>
+                  <mat-select-trigger>
+                    {{movie.value.moviesActors ? movie.value.moviesActors[0].name : ''}}
+                    <span *ngIf="movie.value.moviesActors?.length > 1" class="example-additional-selection">
+                      (+{{movie.value.moviesActors.length - 1}}
+                      {{movie.value.moviesActors?.length === 2 ? 'other' : 'others'}})
+                    </span>
+                  </mat-select-trigger>
+                  <mat-option *ngFor="let actor of actors" [value]="actor">{{actor.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <label class="textarea-label">Description</label>
+              <mat-form-field>
+                <textarea cols="3" matInput formControlName="description" placeholder=""></textarea>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row action-btn">
+            <button md-raised-button type="submit" class="btn btn-rose">CREATE MOVIE</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <h1>Movie info preview</h1>
+  </div>
+</div>

@@ -17,7 +17,11 @@ import {
     MatSliderModule,
     MatExpansionModule,
     MatCheckboxModule,
-    MatRadioModule
+    MatRadioModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
 } from '@angular/material';
 
 const modules = [
@@ -38,7 +42,11 @@ const modules = [
     MatSliderModule,
     MatExpansionModule,
     MatRadioModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatSelectModule,
+    MatOptionModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
 ];
 
 @NgModule({

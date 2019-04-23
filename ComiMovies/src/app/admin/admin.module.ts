@@ -12,11 +12,12 @@ import { NavbarComponent } from './components/ui/navbar/navbar.component';
 import { SettingComponent } from './components/setting/setting.component';
 import { CreateGenreComponent } from './genres/create-genre/create-genre.component';
 import { CreateMoviesComponent } from './movies/create-movies/create-movies.component';
-import { MaterialModule } from '../material.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { GenreService } from '../services/genre.service';
 import { ListGenreComponent } from './genres/list-genre/list-genre.component';
 import { EditGenreComponent } from './genres/edit-genre/edit-genre.component';
+import { MovieListsComponent } from './movies/movie-lists/movie-lists.component';
+import { MaterialModule } from '../material.module';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,9 @@ import { EditGenreComponent } from './genres/edit-genre/edit-genre.component';
     CreateGenreComponent,
     CreateMoviesComponent,
     ListGenreComponent,
-    EditGenreComponent
+    EditGenreComponent,
+    MovieListsComponent,
+    
   ],
   imports: [
     CommonModule,
@@ -38,6 +41,7 @@ import { EditGenreComponent } from './genres/edit-genre/edit-genre.component';
     FormsModule,
     ReactiveFormsModule,
     MaterialModule
+    
   ],
   providers: [
     SettingsService,

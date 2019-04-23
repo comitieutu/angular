@@ -1,18 +1,20 @@
 import { BaseEntity } from './ientity';
+import { Director } from './director';
+import { Actor } from './actor';
 
 export class Movies extends BaseEntity {
-    title : string
-    name : string
+    title: string
+    name: string
     description: string
-    manufacture: Date
+    releaseDate: Date
     status: string
     episode: number
     path: string
-    quality: Quality
+    quality: string
     time: Date
     country: string
     language: Language
-    kind: Kind
+    kind: Number
     genreMovies: Array<any>
     moviesDirectors: Array<any>
     moviesActors: Array<any>
@@ -20,20 +22,45 @@ export class Movies extends BaseEntity {
     comments: Array<any>
 }
 
-export enum Quality {
-    HD,
-    HDRip
-}
+export const QUALITY  = [
+    {code: "HD", displayName:  "HD"},
+    {code: "HDRip", displayName:  "HDRip"},
+    {code: "HQ", displayName:  "HQ"},
+    {code: "TWO_K", displayName:  "2K"},
+    {code: "FOUR_K", displayName:  "4K"},
+]
 
 export enum Language {
-    Vietnamese,
-    ThuyetMinh,
-    LongTieng,
-    VietSub
+    ORIGINAL = "Nguyên bản",
+    THUYETMINH = "Thuyết Minh",
+    LONGTIENG = "Lồng Tiếng",
+    VIETSUB = "Viet subtitle"
 }
 
-export enum Kind {
-    PhimLe,
-    PhimBo,
-    PhimChieuRap
-}
+export const Kind = [
+    { id: 1, name: "Phim lẽ" },
+    { id: 2, name: "Phim bộ" },
+    { id: 3, name: "Phim chiếu rạp" },
+]
+
+export const DIRECTORS:Director[] = [
+    new Director(1, "Steven Spielberg", ""),
+    new Director(2, "Alfred Hitchcock", ""),
+    new Director(3, "Martin Scorsese", ""),
+    new Director(4, "Christopher Nolan", ""),
+    new Director(5, "James Cameron", ""),
+    new Director(6, "Francis Ford Coppola", ""),
+    new Director(7, "Quentin Tarantino", ""),
+    new Director(8, "Guy Ritchie", ""),
+]
+
+export const ACTORS:Actor[] = [
+    new Actor(1, "Jason Statham", ""),
+    new Actor(2, "Sylvester Stallone", ""),
+    new Actor(3, "Martin Scorsese", ""),
+    new Actor(4, "Christopher Nolan", ""),
+    new Actor(5, "James Cameron", ""),
+    new Actor(6, "Francis Ford Coppola", ""),
+    new Actor(7, "Quentin Tarantino", ""),
+    new Actor(8, "Guy Ritchie", ""),
+]

@@ -31,6 +31,7 @@ import { MovieService } from './services/movie.service';
 import { MenuComponent } from './components/ui/menu/menu.component';
 import { FooterComponent } from './components/ui/footer/footer.component';
 import { MaterialModule } from './material.module';
+import { MatFormField, MatFormFieldControl } from '@angular/material';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
