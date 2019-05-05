@@ -5,6 +5,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Kind, QUALITY, DIRECTORS, ACTORS } from 'src/app/models/movies';
 import { Director } from 'src/app/models/director';
 
+declare var $:any;
+
 @Component({
   selector: 'app-create-movies',
   templateUrl: './create-movies.component.html',
@@ -40,6 +42,7 @@ export class CreateMoviesComponent implements OnInit {
    }
 
   ngOnInit() {
+    $.getScript('../../../../assets/js/jasny-bootstrap.min.js');
 
   }
 

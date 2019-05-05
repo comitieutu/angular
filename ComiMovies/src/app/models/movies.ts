@@ -38,9 +38,9 @@ export enum Language {
 }
 
 export const Kind = [
-    { id: 1, name: "Phim lẽ" },
-    { id: 2, name: "Phim bộ" },
-    { id: 3, name: "Phim chiếu rạp" },
+    { code: "PhimLe", name: "Phim lẽ" },
+    { code: "PhimBo", name: "Phim bộ" },
+    { code: "PhimChieuRap", name: "Phim chiếu rạp" },
 ]
 
 export const DIRECTORS:Director[] = [

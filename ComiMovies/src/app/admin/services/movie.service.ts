@@ -17,6 +17,6 @@ export class DirectorService {
     }
 
     postMovie(movie:Movies): any {
-        return this.http.post(`https://localhost:44362/api/movies/`, movie);
+        return this.http.post('https://localhost:44362/api/movies/', movie);
     }
 }
